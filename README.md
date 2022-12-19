@@ -6,9 +6,9 @@ The agent will host enet server by default on port 1300
 to add the agent in ur client gui you write the ip:port, growid and password
 
 (agent must be runned in admin mode)
-to build the project you need have .NET 6 SDK
 
 ## How to build?
+to build the project you need have .NET 6 SDK!
 open cmd and cd to the location where the .sln file locates and then run
 ```
 dotnet build
