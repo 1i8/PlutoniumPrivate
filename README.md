@@ -14,6 +14,9 @@ to build the project you need have .NET 6 SDK!
 dotnet build
 ```
 this will build the whole solution
+
+goodluck with the messy code...
+
 ## Exmaple of lua script
 ```
 bot = Plutonium:GetBot()
