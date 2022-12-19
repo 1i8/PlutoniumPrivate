@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>10</LangVersion>
+        <ApplicationIcon>image.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ImGui.NET" Version="1.88.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2"/>
+        <PackageReference Include="Silk.NET" Version="2.16.0"/>
+        <PackageReference Include="Silk.NET.OpenGL.Extensions.ImGui" Version="2.16.0"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.0-rc.2.22472.3"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="res.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>res.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="res.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>res.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Plutonium.Shared\Plutonium.Shared.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="data.txt">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>
