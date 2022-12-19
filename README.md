@@ -5,7 +5,16 @@ Last growtopia version this is used in 4.09 you can change the game_version and 
 The agent will host enet server by default on port 1300
 to add the agent in ur client gui you write the ip:port, growid and password
 
-Exmaple of lua script
+(agent must be runned in admin mode)
+to build the project you need have .NET 6 SDK
+
+## How to build?
+open cmd and cd to the location where the .sln file locates and then run
+```
+dotnet build
+```
+
+## Exmaple of lua script
 
 bot = Plutonium:GetBot()
 bot:FindPath(10, 10)
