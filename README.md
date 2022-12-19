@@ -9,7 +9,7 @@ to add the agent in ur client gui you write the ip:port, growid and password
 
 ## How to build?
 to build the project you need have .NET 6 SDK!
-open cmd and cd to the location where the .sln file locates and then run
+- open cmd and cd to the location where the .sln file locates and then run
 ```
 dotnet build
 ```
