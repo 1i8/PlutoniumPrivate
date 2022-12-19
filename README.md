@@ -15,9 +15,10 @@ dotnet build
 ```
 this will build the whole solution
 ## Exmaple of lua script
-
+```
 bot = Plutonium:GetBot()
 bot:FindPath(10, 10)
+```
 ## Screenshots
 ![img](https://cdn.discordapp.com/attachments/863369169302716459/1054451613655388230/image.png)
 ![img](https://cdn.discordapp.com/attachments/863369169302716459/1054451721222504538/image.png)
