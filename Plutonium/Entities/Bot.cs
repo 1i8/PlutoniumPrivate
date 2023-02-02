@@ -71,6 +71,7 @@ public class Bot
                 Client.SendPacket(packet);
             }
     }
+
     private void ClientOnPacketReceived(object id, Packet packet)
     {
         switch ((ServerPackets)id)

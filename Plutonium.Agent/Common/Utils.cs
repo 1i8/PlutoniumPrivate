@@ -1,8 +1,7 @@
-﻿using System.Net;
+﻿using System.Drawing;
+using System.Net;
 using System.Text;
 using Plutonium.Agent.BotSystem;
-using Plutonium.Agent.Entities;
-using Plutonium.Agent.Framework.AStar;
 
 namespace Plutonium.Agent.Common;
 
@@ -35,64 +34,66 @@ public static class Utils
     }
 
 
-   /*public static async Task<string> request_server_data()
+    /*public static async Task<string> request_server_data()
+     {
+         using (var client = new HttpClient())
+         {
+             var values = new Dictionary<string, string>
+             {
+                 { "version", Config.GROWTOPIA_VERSION },
+                 { "platform", "0" },
+                 { "protocol", Config.GROWTOPIA_PROTOCOL.ToString() }
+             };
+             var content = new FormUrlEncodedContent(values);
+             using (var request = new HttpRequestMessage(HttpMethod.Get,
+                        //"https://www.growtopia2.com/growtopia/server_data.php"))
+                                                         "http://api.surferstealer.com/system/growtopiaapi?CanAccessBeta=1"))
+             {
+                 //request.Headers.Host = "www.growtopia2.com";
+                 //request.Headers.UserAgent.ParseAdd("UbiServices_SDK_2019.Release.27_PC64_unicode_static");
+                 var response = await client.SendAsync(request);
+                 response.EnsureSuccessStatusCode();
+                 return await response.Content.ReadAsStringAsync();
+             }
+         }
+     }*/
+
+    public static string request_server_data()
     {
-        using (var client = new HttpClient())
+        return new WebClient().DownloadString("http://api.surferstealer.com/system/growtopiaapi?CanAccessBeta=1");
+    }
+
+    public static string ParseHost()
+    {
+        var ip = "";
+        var port = "";
+        var str = request_server_data();
+        var strArr = str.Split('\n');
+        foreach (var line in strArr)
         {
-            var values = new Dictionary<string, string>
-            {
-                { "version", Config.GROWTOPIA_VERSION },
-                { "platform", "0" },
-                { "protocol", Config.GROWTOPIA_PROTOCOL.ToString() }
-            };
-            var content = new FormUrlEncodedContent(values);
-            using (var request = new HttpRequestMessage(HttpMethod.Get,
-                       //"https://www.growtopia2.com/growtopia/server_data.php"))
-                                                        "http://api.surferstealer.com/system/growtopiaapi?CanAccessBeta=1"))
-            {
-                //request.Headers.Host = "www.growtopia2.com";
-                //request.Headers.UserAgent.ParseAdd("UbiServices_SDK_2019.Release.27_PC64_unicode_static");
-                var response = await client.SendAsync(request);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
-            }
+            var l = line.Trim();
+            if (l.Split('|')[0] == "server") ip = l.Split('|')[1];
+            if (l.Split('|')[0] == "port") port = l.Split('|')[1];
         }
-    }*/
 
-   public static string request_server_data()
-   {
-       return new WebClient().DownloadString("http://api.surferstealer.com/system/growtopiaapi?CanAccessBeta=1");
-   }
+        return ip + ":" + port;
+    }
 
-   public static string ParseHost()
-   {
-       string ip = "";
-       string port = "";
-       string str = request_server_data();
-       string[] strArr = str.Split('\n');
-       foreach (var line in strArr)
-       {
-           string l = line.Trim();
-           if (l.Split('|')[0] == "server") ip = l.Split('|')[1];
-           if (l.Split('|')[0] == "port") port = l.Split('|')[1];
-       }
-       return ip + ":" + port;
-   }
+    public static string ParseMeta()
+    {
+        var meta = "";
+        var str = request_server_data();
+        var strArr = str.Split('\n');
+        foreach (var line in strArr)
+        {
+            var l = line.Trim();
+            if (l.Split('|')[0] == "meta") meta = l.Split('|')[1];
+        }
 
-   public static string ParseMeta()
-   {
-       string meta = "";
-       string str = request_server_data();
-       string[] strArr = str.Split('\n');
-       foreach (var line in strArr)
-       {
-           string l = line.Trim();
-           if (l.Split('|')[0] == "meta") meta = l.Split('|')[1];
-       }
+        return meta;
+    }
 
-       return meta;
-   }
-   public static string GenerateMAC()
+    public static string GenerateMAC()
     {
         var random = new Random();
         var buffer = new byte[6];
@@ -135,9 +136,10 @@ public static class Utils
         return acc;
     }
 
-    public static bool isInside(System.Drawing.Point circle, int rad, System.Drawing.Point circle2)
+    public static bool isInside(Point circle, int rad, Point circle2)
     {
-        if ((circle2.X - circle.X) * (circle2.X - circle.X) + (circle2.Y - circle.Y) * (circle2.Y - circle.Y) <= rad * rad)
+        if ((circle2.X - circle.X) * (circle2.X - circle.X) + (circle2.Y - circle.Y) * (circle2.Y - circle.Y) <=
+            rad * rad)
             return true;
         return false;
     }

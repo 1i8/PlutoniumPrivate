@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Net;
 using System.Text;
 using Plutonium.Agent.BotSystem.Entities;
 using Plutonium.Agent.BotSystem.Modules;
@@ -344,22 +343,7 @@ else  s_ptr->erase(packet->m_int_data);*/
             var captchaid = splitted[4];
             var captcha = splitted[1].Replace("0098/captcha/generated/", "");
             captcha = captcha.Replace("-PuzzleWithMissingPiece.rttex", "");
-            _bot.BotLog.Append("Solving captcha: " + captchaid, BotLog.LogType.Plutonium);
-            var api = "http://91.143.81.156:3000/captcha/" + captchaid + "/" + captcha; // growx captcha solver
-            var answer = new WebClient().DownloadString(api);
-            if (!answer.Contains("Failed"))
-            {
-                _bot.SendPacket(2,
-                    "action|dialog_return\ndialog_name|puzzle_captcha_submit\ncaptcha_answer|" + answer +
-                    "|CaptchaID|" + captcha);
-                _bot.BotLog.Append($"Solved captcha: {answer}", BotLog.LogType.Plutonium);
-            }
-            else
-            {
-                _bot.Disconnect();
-                _bot.BotLog.Append("Bot Disconnected because of captcha failure", BotLog.LogType.Plutonium);
-            }
-
+            //Implement here your captcha solver
             return;
         }
 

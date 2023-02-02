@@ -57,7 +57,7 @@ public class Inventory
     {
         return ItemExists(id) ? Items.FirstOrDefault(c => c.Id == id).Amount : 0;
     }
-    
+
     public int GetObjectAmountToPickUp(DroppedObject obj)
     {
         var count = GetItemCount(obj.Id);

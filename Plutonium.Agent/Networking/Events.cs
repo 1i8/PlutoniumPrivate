@@ -87,6 +87,7 @@ public static class Events
             bot.ForceDisconnect = true;
             bot.Peer.DisconnectNow(0);
         }
+
         bot.BotState = "Disconnected";
     }
 

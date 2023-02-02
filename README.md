@@ -1,9 +1,13 @@
-This is my old project and not sure if it still works.
-Plutonium.Agent is the core of bot and the idea is to run it in other computer like in vps and control the bot(s) from client gui.
-Last growtopia version this is used in 4.09 you can change the game_version and protocol from Plutonium.Agent/Entities/Config.cs
+This is my old project what was designed to be used for rotation farm and run the bots from agent in vps and control all the bots from client gui.
 
-The agent will host enet server by default on port 1300.
-to add the agent in ur client gui you write the ip:port, growid and password.
+Plutonium.Agent has mostly all the bot stuff and hosts website on port 8080 to see some basic info on the bots.
+Everything should work in latest gt version just by updating the gt ver in Plutonium.Agent->Entities->Config.cs unless ubisoft has changed something major
+
+Plutonium project contains the client gui to control the bots. To add bot you have to put ip:port if its running in your own pc its 127.0.0.1:1300
+if youre hosting the bot in vps you have to portforward port 1300 UDP and point to vps public ipv4 example 86.211.92.49:1300
+
+if you have to ask something create issue dont dm me on dc.
+
 
 (agent must be runned in admin mode)
 
@@ -25,4 +29,3 @@ bot:FindPath(10, 10)
 ## Screenshots
 ![img](https://cdn.discordapp.com/attachments/863369169302716459/1054451613655388230/image.png)
 ![img](https://cdn.discordapp.com/attachments/863369169302716459/1054451721222504538/image.png)
-![img](https://cdn.discordapp.com/attachments/863369169302716459/1054683463292297286/image.png)

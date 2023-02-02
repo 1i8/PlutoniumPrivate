@@ -7,7 +7,7 @@ namespace ENet.Managed;
 /// <summary>
 ///     Wraps <see cref="NativeENetPacket" /> pointer
 /// </summary>
-public unsafe readonly struct ENetPacket : IEquatable<ENetPacket>
+public readonly unsafe struct ENetPacket : IEquatable<ENetPacket>
 {
     private readonly NativeENetPacket* m_Native;
 

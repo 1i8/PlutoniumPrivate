@@ -8,7 +8,6 @@ using Plutonium.Agent.BotSystem.Modules;
 using Plutonium.Agent.Common;
 using Plutonium.Agent.Entities;
 using Plutonium.Agent.Framework;
-using Plutonium.Agent.Lua.Modules;
 using Plutonium.Agent.Networking;
 using Plutonium.Shared;
 
@@ -20,9 +19,13 @@ public class Bot
 
     public BotLog BotLog = new();
     public string BotState = "Disconnected";
+
+    public bool ChangingSubServers;
     public ENetClient? Client;
 
     public Events Events;
+
+    public bool ForceDisconnect;
 
     public Globals Globals;
 
@@ -43,10 +46,6 @@ public class Bot
     public World World = new();
 
     public WorldStruct WorldStruct;
-
-    public bool ChangingSubServers = false;
-
-    public bool ForceDisconnect = false;
 
     public Bot(int id, string tankIdName, string tankPass, bool isLua = false)
     {
@@ -145,9 +144,9 @@ public class Bot
 
     public void Connect()
     {
-        string hstr = Utils.ParseHost();
-        string host = hstr.Split(':')[0];
-        ushort port = ushort.Parse(hstr.Split(':')[1]);
+        var hstr = Utils.ParseHost();
+        var host = hstr.Split(':')[0];
+        var port = ushort.Parse(hstr.Split(':')[1]);
         Connect(host, port);
     }
 
@@ -167,7 +166,6 @@ public class Bot
     public void Collect(int radius = 1)
     {
         foreach (var droppedObject in World.DroppedObjects)
-        {
             if (Utils.isInside(new Point(droppedObject.X / 32, droppedObject.Y / 32), radius, NetAvatar.Tile))
             {
                 var packet = new GamePacket();
@@ -178,7 +176,6 @@ public class Bot
                 packet.int_data = droppedObject.Uid;
                 SendPacket(4, packet);
             }
-        }
     }
 
     public void SendPlayerState(int state = 0)
@@ -236,7 +233,7 @@ public class Bot
 
     private void ClientOnDisconnect(object sender, uint e)
     {
-        if (!ChangingSubServers &&  !ForceDisconnect)
+        if (!ChangingSubServers && !ForceDisconnect)
         {
             BotLog.Append("Bot Disconnected", BotLog.LogType.Plutonium);
             BotState = "Disconnected";

@@ -55,9 +55,7 @@ public class Parse
     {
         var lines = str.Split(Environment.NewLine);
         foreach (var line in lines)
-        {
             if (line.Contains('|'))
                 _dictionary.Add(line.Split('|')[0], line.Split('|')[1]);
-        }
     }
 }
