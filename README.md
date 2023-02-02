@@ -1,6 +1,6 @@
 This is my old project what was designed to be used for rotation farm and run the bots from agent in vps and control all the bots from client gui.
 
-Plutonium.Agent has mostly all the bot stuff and hosts website on port 8080 to see some basic info on the bots.
+Plutonium.Agent has mostly all the bot stuff and hosts website on port 8080 to see some basic info of the bots.
 Everything should work in latest gt version just by updating the gt ver in Plutonium.Agent->Entities->Config.cs unless ubisoft has changed something major
 
 Plutonium project contains the client gui to control the bots. To add bot you have to put ip:port if its running in your own pc its 127.0.0.1:1300
